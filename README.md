@@ -48,9 +48,9 @@ A disponibilidade de cada provedor é configurável via `appsettings.json`:
   "FastPay": { "Enabled": true },
   "SecurePay": { "Enabled": true }
 }
+```
 
-
-## Executar localmente
+### **Executar localmente**
 Pré-requisitos
 
 .NET 9 SDK
@@ -99,37 +99,40 @@ Exemplo de Resposta (SecurePay)
 ## Fallback de provedor
 Fallback Automático
 
-Se o provedor preferido estiver indisponível:
-PaymentService captura a exceção
-Tenta automaticamente o outro provedor
-A resposta permanece no mesmo formato, independentemente da origem
+- Se o provedor preferido estiver indisponível:
+- PaymentService captura a exceção
+- Tenta automaticamente o outro provedor
+- A resposta permanece no mesmo formato, independentemente da origem
 
-Exemplo para desativar FastPay:
+## Exemplo para desativar FastPay:
 Defina algum provedor como indisponivel em `appsettings.json`. O serviço tentara o provedor restante de forma transparente.
-
+``` json
 "Providers": {
   "FastPay": { "Enabled": false },
   "SecurePay": { "Enabled": true }
 }
-
+```
 
 ## Teste rapido via arquivo .http
 O arquivo PayFlow/PayFlow.http contém requisições prontas para uso com:
 
-Visual Studio
-VS Code (REST Client)
-JetBrains Rider
+- Visual Studio
+- VS Code (REST Client)
+- JetBrains Rider
 
 Basta abrir o arquivo e clicar em Send Request.
 
 ## Estrutura Simplificada
-PayFlow/
+``` pgsql
+ PayFlow/
  ├── Exceptions/
  ├── Models/
  ├── Providers/
  ├── Services/
  ├── appsettings.json
  ├── Program.cs
+ ├── PayFlow.http
+```
 
 ## Licença
 Projeto desenvolvido exclusivamente para fins de demonstração técnica.
