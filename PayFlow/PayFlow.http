@@ -1,0 +1,9 @@
+@PayFlow_HostAddress = http://localhost:5136
+
+POST {{PayFlow_HostAddress}}/payments
+Content-Type: application/json
+
+{
+  "amount": 120.50,
+  "currency": "BRL"
+}

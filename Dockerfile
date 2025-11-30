@@ -1,0 +1,18 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+COPY ["PayFlow/PayFlow.csproj", "PayFlow/"]
+RUN dotnet restore "PayFlow/PayFlow.csproj"
+
+COPY . .
+WORKDIR "/src/PayFlow"
+RUN dotnet publish "PayFlow.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+WORKDIR /app
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "PayFlow.dll"]
